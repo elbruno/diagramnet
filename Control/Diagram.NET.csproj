@@ -17,6 +17,9 @@
     <StartupObject />
     <UseWindowsForms>true</UseWindowsForms>
     <ImportWindowsDesktopTargets>true</ImportWindowsDesktopTargets>
+    <AssemblyTitle>Designer</AssemblyTitle>
+    <Company>Dalssoft</Company>
+    <AssemblyVersion>0.4.0.%2a</AssemblyVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <BaseAddress>285212672</BaseAddress>
