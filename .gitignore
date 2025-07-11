@@ -183,3 +183,5 @@ UpgradeLog*.htm
 FakesAssemblies/
 /Control/bin
 /TestForm/bin
+/Control/.vs/Diagram.NET/copilot-chat/87326602/sessions
+/Control/.vs/Diagram.NET
