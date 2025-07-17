@@ -2,7 +2,6 @@ using System;
 using System.Drawing;
 using System.Windows.Forms;
 using System.Drawing.Text;
-using System.Drawing.Drawing2D;
 using System.ComponentModel;
 using System.IO;
 using System.Runtime.Serialization;
