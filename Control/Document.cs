@@ -811,13 +811,4 @@ namespace Dalssoft.DiagramNet
 		{
 			OnElementPropertyChanged(sender, e);
 		}
-		#endregion
-	
-		#region IDeserializationCallback Members
-		void IDeserializationCallback.OnDeserialization(object sender)
-		{
-			RecreateEventsHandlers();
-		}
-		#endregion
-	}
-}
+		#endregion	

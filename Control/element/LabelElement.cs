@@ -1,6 +1,8 @@
 using System;
 using System.Drawing;
+using System.Windows.Forms;
 using System.Drawing.Text;
+using System.Drawing.Drawing2D;
 using System.ComponentModel;
 using System.IO;
 using System.Runtime.Serialization;
@@ -13,7 +15,6 @@ namespace Dalssoft.DiagramNet
 {
 	[
 	Serializable,
-	TypeConverter(typeof(ExpandableObjectConverter))
 	]
 	public class LabelElement: BaseElement, ISerializable, IControllable
 	{
@@ -100,6 +101,7 @@ namespace Dalssoft.DiagramNet
 			set
 			{
 				alignment = value;
+				alignment = value;
 				format.Alignment = alignment;
 				if (autoSize) DoAutoSize();
 				OnAppearanceChanged(new EventArgs());
@@ -149,7 +151,6 @@ namespace Dalssoft.DiagramNet
 					format.FormatFlags &= ~StringFormatFlags.NoWrap;
 				else
 					format.FormatFlags |= StringFormatFlags.NoWrap;
-				
 				if (autoSize) DoAutoSize();
 				OnAppearanceChanged(new EventArgs());
 			}
@@ -168,11 +169,9 @@ namespace Dalssoft.DiagramNet
 					format.FormatFlags |= StringFormatFlags.DirectionVertical;
 				else
 					format.FormatFlags &= ~StringFormatFlags.DirectionVertical;
-				
 				if (autoSize) DoAutoSize();
 				OnAppearanceChanged(new EventArgs());
 			}
-
 		}
 
 		public bool ReadOnly
@@ -265,7 +264,7 @@ namespace Dalssoft.DiagramNet
 			{
 				size = value;
 				if (autoSize) DoAutoSize();
-				base.Size = size;			
+				base.Size = size;
 			}
 		}
 
@@ -276,7 +275,6 @@ namespace Dalssoft.DiagramNet
 				return format;
 			}
 		}
-
 		#endregion
 
 		public void DoAutoSize()
@@ -496,6 +494,21 @@ namespace Dalssoft.DiagramNet
 //		}
 //	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

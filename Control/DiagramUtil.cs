@@ -1,6 +1,8 @@
 using System;
 using System.Collections;
 using System.Drawing;
+using System.Drawing.Text;
+using System.Drawing.Drawing2D;
 
 namespace Dalssoft.DiagramNet
 {

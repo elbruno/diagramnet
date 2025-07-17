@@ -885,7 +885,7 @@ namespace Dalssoft.DiagramNet
 
 			isMultiSelection = false;
 			isAddSelection = false;
-			isAddLink = false;
+		 isAddLink = false;
 
 			changed = false;
 
