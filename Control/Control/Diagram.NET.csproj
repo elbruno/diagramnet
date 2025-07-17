@@ -2,6 +2,7 @@
   <PropertyGroup>
     <TargetFramework>net9.0-windows</TargetFramework>
     <UseWindowsForms>true</UseWindowsForms>
+    <UseWPF>false</UseWPF>
     <AssemblyName>Dalssoft.DiagramNet</AssemblyName>
     <AssemblyTitle>Designer</AssemblyTitle>
     <Company>Dalssoft</Company>
