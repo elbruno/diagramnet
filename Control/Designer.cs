@@ -9,6 +9,7 @@ using System.Xml;
 using System.Runtime.Serialization;
 using System.ComponentModel;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace Dalssoft.DiagramNet
 {
@@ -784,7 +785,8 @@ namespace Dalssoft.DiagramNet
             var options = new JsonSerializerOptions
             {
                 WriteIndented = true,
-                IncludeFields = true
+                IncludeFields = true,
+                ReferenceHandler = ReferenceHandler.Preserve
             };
             
             string jsonString = JsonSerializer.Serialize(document, options);
@@ -795,7 +797,8 @@ namespace Dalssoft.DiagramNet
         {
             var options = new JsonSerializerOptions
             {
-                IncludeFields = true
+                IncludeFields = true,
+                ReferenceHandler = ReferenceHandler.Preserve
             };
             
             string jsonString = File.ReadAllText(fileName);
@@ -807,7 +810,8 @@ namespace Dalssoft.DiagramNet
             var options = new JsonSerializerOptions
             {
                 WriteIndented = true,
-                IncludeFields = true
+                IncludeFields = true,
+                ReferenceHandler = ReferenceHandler.Preserve
             };
             
             JsonSerializer.Serialize(ms, document, options);
@@ -817,7 +821,8 @@ namespace Dalssoft.DiagramNet
         {
             var options = new JsonSerializerOptions
             {
-                IncludeFields = true
+                IncludeFields = true,
+                ReferenceHandler = ReferenceHandler.Preserve
             };
             
             document = JsonSerializer.Deserialize<Document>(ms, options);
@@ -843,7 +848,8 @@ namespace Dalssoft.DiagramNet
 			var options = new JsonSerializerOptions
 			{
 				WriteIndented = true,
-				IncludeFields = true
+				IncludeFields = true,
+				ReferenceHandler = ReferenceHandler.Preserve
 			};
 
 			string jsonString = JsonSerializer.Serialize(document.SelectedElements.GetArray(), options);
@@ -862,7 +868,8 @@ namespace Dalssoft.DiagramNet
 			{
 				var options = new JsonSerializerOptions
 				{
-					IncludeFields = true
+					IncludeFields = true,
+					ReferenceHandler = ReferenceHandler.Preserve
 				};
 
 				string jsonString = (string)iData.GetData(format.Name);
