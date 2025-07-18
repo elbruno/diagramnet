@@ -5,6 +5,7 @@ using System.Drawing.Text;
 using System.Windows.Forms;
 using System.Runtime.Serialization;
 using System.Security.Permissions;
+using System.Text.Json.Serialization;
 
 namespace Dalssoft.DiagramNet
 {
@@ -755,7 +756,8 @@ namespace Dalssoft.DiagramNet
 		
 		// Property Changed
 		[field: NonSerialized]
-		public event EventHandler PropertyChanged; 
+		[JsonIgnore]
+		public event EventHandler PropertyChanged;
 
 		protected virtual void OnPropertyChanged(EventArgs e)
 		{
@@ -765,6 +767,7 @@ namespace Dalssoft.DiagramNet
 
 		// Appearance Property Changed
 		[field: NonSerialized]
+		[JsonIgnore]
 		public event EventHandler AppearancePropertyChanged;
 
 		protected virtual void OnAppearancePropertyChanged(EventArgs e)
@@ -778,6 +781,7 @@ namespace Dalssoft.DiagramNet
 
 		// Element Property Changed
 		[field: NonSerialized]
+		[JsonIgnore]
 		public event EventHandler ElementPropertyChanged;
 
 		protected virtual void OnElementPropertyChanged(object sender, EventArgs e)
@@ -790,6 +794,7 @@ namespace Dalssoft.DiagramNet
 		public delegate void ElementSelectionEventHandler(object sender, ElementSelectionEventArgs e);
 		
 		[field: NonSerialized]
+		[JsonIgnore]
 		public event ElementSelectionEventHandler ElementSelection;
 
 		protected virtual void OnElementSelection(object sender, ElementSelectionEventArgs e)
