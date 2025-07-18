@@ -2,6 +2,7 @@ using System;
 using System.Drawing;
 using System.ComponentModel;
 using System.Xml;
+using System.Text.Json.Serialization;
 
 namespace Dalssoft.DiagramNet
 {
@@ -10,6 +11,17 @@ namespace Dalssoft.DiagramNet
 	/// document.
 	/// </summary>
 	[Serializable]
+	[JsonDerivedType(typeof(ElipseNode), typeDiscriminator: "ElipseNode")]
+	[JsonDerivedType(typeof(StraightLinkElement), typeDiscriminator: "StraightLinkElement")]
+	[JsonDerivedType(typeof(LabelElement), typeDiscriminator: "LabelElement")]
+	[JsonDerivedType(typeof(ConnectorElement), typeDiscriminator: "ConnectorElement")]
+	[JsonDerivedType(typeof(CommentBoxNode), typeDiscriminator: "CommentBoxNode")]
+	[JsonDerivedType(typeof(ElipseElement), typeDiscriminator: "ElipseElement")]
+	[JsonDerivedType(typeof(RightAngleLinkElement), typeDiscriminator: "RightAngleLinkElement")]
+	[JsonDerivedType(typeof(LineElement), typeDiscriminator: "LineElement")]
+	[JsonDerivedType(typeof(CommentBoxElement), typeDiscriminator: "CommentBoxElement")]
+	[JsonDerivedType(typeof(RectangleElement), typeDiscriminator: "RectangleElement")]
+	[JsonDerivedType(typeof(RectangleNode), typeDiscriminator: "RectangleNode")]
 	public abstract class BaseElement
 	{
 		protected Point location;

@@ -1,5 +1,6 @@
 using System;
 using System.Drawing;
+using System.Text.Json.Serialization;
 
 namespace Dalssoft.DiagramNet
 {
@@ -20,6 +21,7 @@ namespace Dalssoft.DiagramNet
 			fillColor2 = Color.Empty;
 		}
 
+		[JsonIgnore]
 		public NodeElement ParentElement
 		{
 			get

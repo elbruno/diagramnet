@@ -7,8 +7,9 @@ using System.IO;
 using System.Text;
 using System.Xml;
 using System.Runtime.Serialization;
-using System.Runtime.Serialization.Formatters.Binary;
 using System.ComponentModel;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace Dalssoft.DiagramNet
 {
@@ -781,30 +782,50 @@ namespace Dalssoft.DiagramNet
         #region Open/Save File
         public void Save(string fileName)
         {
-            IFormatter formatter = new BinaryFormatter() { AssemblyFormat = System.Runtime.Serialization.Formatters.FormatterAssemblyStyle.Simple };
-            Stream stream = new FileStream(fileName, FileMode.Create, FileAccess.Write, FileShare.None);
-            formatter.Serialize(stream, document);
-            stream.Close();
+            var options = new JsonSerializerOptions
+            {
+                WriteIndented = true,
+                IncludeFields = true,
+                ReferenceHandler = ReferenceHandler.Preserve
+            };
+            
+            string jsonString = JsonSerializer.Serialize(document, options);
+            File.WriteAllText(fileName, jsonString);
         }
 
         public void Open(string fileName)
         {
-            IFormatter formatter = new BinaryFormatter() { AssemblyFormat = System.Runtime.Serialization.Formatters.FormatterAssemblyStyle.Simple };
-			Stream stream = new FileStream(fileName, FileMode.Open, FileAccess.Read, FileShare.Read);
-			document = (Document) formatter.Deserialize(stream);
-			stream.Close();
-			RecreateEventsHandlers();
-		}
+            var options = new JsonSerializerOptions
+            {
+                IncludeFields = true,
+                ReferenceHandler = ReferenceHandler.Preserve
+            };
+            
+            string jsonString = File.ReadAllText(fileName);
+            document = JsonSerializer.Deserialize<Document>(jsonString, options);
+            RecreateEventsHandlers();
+        }
         public void Save(System.IO.MemoryStream ms)
         {
-            IFormatter formatter = new BinaryFormatter() { AssemblyFormat = System.Runtime.Serialization.Formatters.FormatterAssemblyStyle.Simple };
-            formatter.Serialize(ms, document);
-          
+            var options = new JsonSerializerOptions
+            {
+                WriteIndented = true,
+                IncludeFields = true,
+                ReferenceHandler = ReferenceHandler.Preserve
+            };
+            
+            JsonSerializer.Serialize(ms, document, options);
         }
-        public void Open( System.IO.MemoryStream ms)
+        
+        public void Open(System.IO.MemoryStream ms)
         {
-            IFormatter formatter = new BinaryFormatter() { AssemblyFormat = System.Runtime.Serialization.Formatters.FormatterAssemblyStyle.Simple };
-            document = (Document)formatter.Deserialize(ms);
+            var options = new JsonSerializerOptions
+            {
+                IncludeFields = true,
+                ReferenceHandler = ReferenceHandler.Preserve
+            };
+            
+            document = JsonSerializer.Deserialize<Document>(ms, options);
             RecreateEventsHandlers();
         }
         public void    Save(out byte[]  buffer)
@@ -824,11 +845,15 @@ namespace Dalssoft.DiagramNet
 		{
 			if (document.SelectedElements.Count == 0) return;
 
-			IFormatter formatter = new BinaryFormatter();
-			Stream stream = new MemoryStream();
-			formatter.Serialize(stream, document.SelectedElements.GetArray());
-			DataObject data = new DataObject(DataFormats.GetFormat("Diagram.NET Element Collection").Name,
-				stream);
+			var options = new JsonSerializerOptions
+			{
+				WriteIndented = true,
+				IncludeFields = true,
+				ReferenceHandler = ReferenceHandler.Preserve
+			};
+
+			string jsonString = JsonSerializer.Serialize(document.SelectedElements.GetArray(), options);
+			DataObject data = new DataObject(DataFormats.GetFormat("Diagram.NET Element Collection").Name, jsonString);
 			Clipboard.SetDataObject(data);
 		}
 
@@ -841,10 +866,14 @@ namespace Dalssoft.DiagramNet
 			DataFormats.Format format = DataFormats.GetFormat("Diagram.NET Element Collection");
 			if (iData.GetDataPresent(format.Name))
 			{
-				IFormatter formatter = new BinaryFormatter();
-				Stream stream = (MemoryStream) iData.GetData(format.Name);
-				BaseElement[] elCol = (BaseElement[]) formatter.Deserialize(stream);
-				stream.Close();
+				var options = new JsonSerializerOptions
+				{
+					IncludeFields = true,
+					ReferenceHandler = ReferenceHandler.Preserve
+				};
+
+				string jsonString = (string)iData.GetData(format.Name);
+				BaseElement[] elCol = JsonSerializer.Deserialize<BaseElement[]>(jsonString, options);
 
 				foreach(BaseElement el in elCol)
 				{

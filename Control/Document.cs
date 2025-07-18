@@ -5,6 +5,7 @@ using System.Drawing.Text;
 using System.Windows.Forms;
 using System.Runtime.Serialization;
 using System.Security.Permissions;
+using System.Text.Json.Serialization;
 
 namespace Dalssoft.DiagramNet
 {
@@ -755,7 +756,7 @@ namespace Dalssoft.DiagramNet
 		
 		// Property Changed
 		[field: NonSerialized]
-		public event EventHandler PropertyChanged; 
+		public event EventHandler PropertyChanged;
 
 		protected virtual void OnPropertyChanged(EventArgs e)
 		{
@@ -812,6 +813,12 @@ namespace Dalssoft.DiagramNet
 		private void element_AppearanceChanged(object sender, EventArgs e)
 		{
 			OnElementPropertyChanged(sender, e);
+		}
+
+		public void OnDeserialization(object sender)
+		{
+			// This method is called when deserialization of the object graph is complete
+			RecreateEventsHandlers();
 		}
 		#endregion
 	}
