@@ -171,7 +171,6 @@ namespace Dalssoft.DiagramNet
 
 		#region Events
 		[field: NonSerialized]
-		[JsonIgnore]
 		public event EventHandler AppearanceChanged;
 
 		protected virtual void OnAppearanceChanged(EventArgs e)
