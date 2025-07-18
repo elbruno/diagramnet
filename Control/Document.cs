@@ -813,6 +813,12 @@ namespace Dalssoft.DiagramNet
 		{
 			OnElementPropertyChanged(sender, e);
 		}
+
+		public void OnDeserialization(object sender)
+		{
+			// This method is called when deserialization of the object graph is complete
+			RecreateEventsHandlers();
+		}
 		#endregion
 	}
 }
